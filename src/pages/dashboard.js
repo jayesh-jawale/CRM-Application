@@ -5,6 +5,8 @@ import { Table } from "react-bootstrap";
 import { Breadcrumb } from "react-bootstrap";
 import PropTypes from "prop-types";
 
+import { Link } from "react-router-dom";
+
 export const Dashboard = () => {
   return (
     <Container>
@@ -15,12 +17,14 @@ export const Dashboard = () => {
     </Row>
     <Row>
         <Col className="text-center mt-5 mb-2">
-          <Button
-            variant="info"
-            style={{ fontSize: "2rem", padding: "10px 30px" }}
-          >
-            Add New Ticket
-          </Button>
+        <Link to="/add-ticket">
+            <Button
+              variant="info"
+              style={{ fontSize: "2rem", padding: "10px 30px" }}
+            >
+              Add New Ticket
+            </Button>
+          </Link>
         </Col>
       </Row>
       <Row>
