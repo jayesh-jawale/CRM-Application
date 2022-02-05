@@ -75,7 +75,7 @@ const TicketTable = ({ tickets }) => {
     );
   };
 
- const PageBreadCrumb = ({ page }) => {
+ export const PageBreadCrumb = ({ page }) => {
   return (
     <Breadcrumb>
       <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
