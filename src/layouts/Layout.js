@@ -5,7 +5,7 @@ import { Footer } from "./Footer";
 export const Layout = ({ children }) => {
   return (
     <div className="default-layout">
-      <header className="header">
+      <header className="header mb-2">
         <Header />
       </header>
 
