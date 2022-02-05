@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import tickets from "../../src/data/ticket.json";
 import { Table } from "react-bootstrap";
 import { Breadcrumb } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 export const Dashboard = () => {
   return (
@@ -42,7 +43,7 @@ export const Dashboard = () => {
   );
 };
 
-const TicketTable = ({ tickets }) => {
+export const TicketTable = ({ tickets }) => {
     return (
       <Table striped bordered hover>
         <thead>
@@ -73,6 +74,10 @@ const TicketTable = ({ tickets }) => {
         </tbody>
       </Table>
     );
+  };
+
+  TicketTable.propTypes = {
+    tickets: PropTypes.array.isRequired,
   };
 
  export const PageBreadCrumb = ({ page }) => {
