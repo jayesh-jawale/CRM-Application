@@ -5,6 +5,7 @@ import { Dashboard } from './pages/dashboard';
 import { AddTicket } from './pages/addTicket';
 import { TicketLists } from './pages/TicketLists';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import { Page } from './pages/ticket.page';
 
 export default function App() {
   return (
@@ -25,6 +26,10 @@ export default function App() {
 
           <PrivateRoute  exact path="/tickets">
             <TicketLists/>
+          </PrivateRoute >
+
+          <PrivateRoute  exact path="/tickets/:tId">
+            <Page/>
           </PrivateRoute >
 
         </Switch>

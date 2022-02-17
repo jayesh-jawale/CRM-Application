@@ -63,7 +63,9 @@ export const TicketTable = ({ tickets }) => {
             tickets.map((row) => (
               <tr key={row.id}>
                 <td>{row.id}</td>
-                <td>{row.subject}</td>
+                <td>
+                  <Link to={`/tickets/${row.id}`}>{row.subject}</Link>
+                </td>
                 <td>{row.status}</td>
                 <td>{row.addedAt}</td>
               </tr>
