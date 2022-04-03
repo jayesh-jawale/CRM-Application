@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import tickets from "../../src/data/ticket.json";
 import { Table } from "react-bootstrap";
 import { Breadcrumb } from "react-bootstrap";
-import PropTypes from "prop-types";
+import { useSelector } from "react-redux";  // To access whole global state
 
 import { Link } from "react-router-dom";
 
@@ -47,7 +47,15 @@ export const Dashboard = () => {
   );
 };
 
-export const TicketTable = ({ tickets }) => {
+export const TicketTable = () => {
+  const {searchTicketList, isLoading, error} = useSelector((state) => state.tickets);
+
+   if(isLoading)
+    return <h3>Loading...</h3>
+
+   if(error)
+    return <h3>{error}</h3>
+
     return (
       <Table striped bordered hover>
         <thead>
@@ -59,15 +67,15 @@ export const TicketTable = ({ tickets }) => {
           </tr>
         </thead>
         <tbody>
-          {tickets.length ? (
-            tickets.map((row) => (
-              <tr key={row.id}>
-                <td>{row.id}</td>
+          {searchTicketList.length ? (
+            searchTicketList.map((row) => (
+              <tr key={row._id}>
+                <td>{row._id}</td>
                 <td>
-                  <Link to={`/tickets/${row.id}`}>{row.subject}</Link>
+                  <Link to={`/tickets/${row._id}`}>{row.subject}</Link>
                 </td>
                 <td>{row.status}</td>
-                <td>{row.addedAt}</td>
+                <td>{row.openedAt}</td>
               </tr>
             ))
           ) : (
@@ -80,10 +88,6 @@ export const TicketTable = ({ tickets }) => {
         </tbody>
       </Table>
     );
-  };
-
-  TicketTable.propTypes = {
-    tickets: PropTypes.array.isRequired,
   };
 
  export const PageBreadCrumb = ({ page }) => {

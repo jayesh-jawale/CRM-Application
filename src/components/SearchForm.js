@@ -1,9 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 
 import { Form, Row, Col } from "react-bootstrap";
+import {filterSearchTicket} from "../pages/ticketAction";
 
-export const SearchForm = ({ handleOnChange, str }) => {
+export const SearchForm = () => {
+  const dispatch = useDispatch();
+
+  const handleOnChange = (e) => {
+    const {value} = e.target;
+    dispatch(filterSearchTicket(value));
+  }
+
   return (
     <div>
       <Form>
@@ -15,7 +23,6 @@ export const SearchForm = ({ handleOnChange, str }) => {
             <Form.Control
               name="searchStr"
               onChange={handleOnChange}
-              value={str}
               placeholder="Search ..."
             />
           </Col>
@@ -23,9 +30,4 @@ export const SearchForm = ({ handleOnChange, str }) => {
       </Form>
     </div>
   );
-};
-
-SearchForm.propTypes = {
-  handleOnChange: PropTypes.func.isRequired,
-  str: PropTypes.string.isRequired,
 };
