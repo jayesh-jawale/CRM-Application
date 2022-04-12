@@ -2,12 +2,15 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
+import { userLogout } from "../pages/userAction";
 
 export const Header = () => {
   const history = useHistory();
 
   const logMeOut = () => {
     sessionStorage.removeItem("accessJWT");
+    localStorage.removeItem("crmSite");
+    userLogout();
     history.push("/");
   };
   return (

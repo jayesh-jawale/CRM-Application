@@ -4,7 +4,9 @@ import {Layout} from '././layouts/Layout'
 import { Dashboard } from './pages/dashboard';
 import { AddTicket } from './pages/addTicket';
 import { TicketLists } from './pages/TicketLists';
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux'; // To access whole global state
 import { Page } from './pages/ticket.page';
 
 export default function App() {
@@ -38,8 +40,10 @@ export default function App() {
   );
 }
 
-const isAuth = true;
 const PrivateRoute = ({ children, ...rest }) => {
+  const { isAuth } = useSelector((state) => state.login)
+  useEffect(() => {}, [isAuth]);
+
   return (
     <Route
       {...rest}

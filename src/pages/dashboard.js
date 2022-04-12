@@ -4,6 +4,7 @@ import tickets from "../../src/data/ticket.json";
 import { Table } from "react-bootstrap";
 import { Breadcrumb } from "react-bootstrap";
 import { useSelector } from "react-redux";  // To access whole global state
+import { LinkContainer } from "react-router-bootstrap";
 
 import { Link } from "react-router-dom";
 
@@ -93,7 +94,9 @@ export const TicketTable = () => {
  export const PageBreadCrumb = ({ page }) => {
   return (
     <Breadcrumb>
+      <LinkContainer to="/">
       <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+      </LinkContainer>
       <Breadcrumb.Item active>{page}</Breadcrumb.Item>
     </Breadcrumb>
   );
