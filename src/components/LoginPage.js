@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {loginPending, loginSuccess, loginFail} from '../slices/loginSlice';
+import {userUserProfile} from '../pages/userAction';
 import {userLogin} from '../components/loginAction';
 import { useHistory } from "react-router-dom";
 
@@ -44,6 +45,7 @@ export const LoginPage = ({ switchForm }) => {
                return dispatch(loginFail(isAuth.message))
             }
             dispatch(loginSuccess())
+            dispatch(userUserProfile())
             history.push("/dashboard");
         } catch (error) {
             dispatch(loginFail(error.message))
