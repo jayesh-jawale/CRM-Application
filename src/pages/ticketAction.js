@@ -1,4 +1,4 @@
-import {fetchTicketLoading, fetchTicketSuccess, fetchTicketFail, searchTickets} from "./ticketSlice";
+import {fetchTicketLoading, fetchTicketSuccess, fetchTicketFail, searchTickets} from "../slices/ticketSlice";
 import axios from "axios";
 
 export const fetchAllTickets = () => async (dispatch) => {
@@ -7,7 +7,7 @@ export const fetchAllTickets = () => async (dispatch) => {
         const result = await axios.get('http://localhost:3001/v1/ticket',
         {
             headers: {
-                Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imphd2FsZWpheWVzaDEyM0BnbWFpbC5jb20iLCJpYXQiOjE2NDg5ODIwMjcsImV4cCI6MTY0ODk4MjkyN30.bWlJ0BgjZnf2ju1j-84fYEPWVojXKXSnez_kv_xf_RU',
+                Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imphd2FsZWpheWVzaDEyM0BnbWFpbC5jb20iLCJpYXQiOjE2NDk3MDA3MTcsImV4cCI6MTY0OTcwMTYxN30.VybEuz7p6lZGwD8CZesqB2i7vt1FW_kPPwAWommSDv8',
             },
         })
         console.log(result)
