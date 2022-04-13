@@ -7,7 +7,7 @@ export const fetchAllTickets = () => async (dispatch) => {
         const result = await axios.get('http://localhost:3001/v1/ticket',
         {
             headers: {
-                Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imphd2FsZWpheWVzaDEyM0BnbWFpbC5jb20iLCJpYXQiOjE2NDk3MDA3MTcsImV4cCI6MTY0OTcwMTYxN30.VybEuz7p6lZGwD8CZesqB2i7vt1FW_kPPwAWommSDv8',
+                Authorization: sessionStorage.getItem('accessJWT'),
             },
         })
         console.log(result)
