@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux'; // To access whole global state
 import { Page } from './pages/ticket.page';
+import { useDispatch } from 'react-redux';
+import {loginSuccess} from './slices/loginSlice';
 
 export default function App() {
   return (
@@ -41,8 +43,12 @@ export default function App() {
 }
 
 const PrivateRoute = ({ children, ...rest }) => {
+  const dispatch = useDispatch();
   const { isAuth } = useSelector((state) => state.login)
-  useEffect(() => {}, [isAuth]);
+
+  useEffect(() => {
+    sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
+  }, [dispatch]);
 
   return (
     <Route
