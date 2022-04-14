@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'; // To access whole global state
 import { Page } from './pages/ticket.page';
 import { useDispatch } from 'react-redux';
 import {loginSuccess} from './slices/loginSlice';
+import {userUserProfile} from './pages/userAction';
 
 export default function App() {
   return (
@@ -47,7 +48,7 @@ const PrivateRoute = ({ children, ...rest }) => {
   const { isAuth } = useSelector((state) => state.login)
 
   useEffect(() => {
-    sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
+    sessionStorage.getItem("accessJWT") && dispatch(loginSuccess()) && dispatch(userUserProfile());
   }, [dispatch]);
 
   return (

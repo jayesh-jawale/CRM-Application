@@ -1,5 +1,6 @@
 import {fetchTicketLoading, fetchTicketSuccess, fetchTicketFail, searchTickets,
-    fetchSingleTicketLoading, fetchSingleTicketSuccess, fetchSingleTicketFail} from "../slices/ticketSlice";
+    fetchSingleTicketLoading, fetchSingleTicketSuccess, fetchSingleTicketFail,
+    replyTicketLoading, replyTicketSuccess, replyTicketFail} from "../slices/ticketSlice";
 import axios from "axios";
 
 const rootUrl = "http://localhost:3001/v1/";
@@ -14,7 +15,6 @@ export const fetchAllTickets = () => async (dispatch) => {
                 Authorization: sessionStorage.getItem('accessJWT'),
             },
         })
-        console.log(result)
         dispatch(fetchTicketSuccess(result.data.data));
     } catch (error) {
         dispatch(fetchTicketFail(error.message));
@@ -30,10 +30,28 @@ export const fetchSingleTicket = (_id) => async (dispatch) => {
                 Authorization: sessionStorage.getItem('accessJWT'),
             },
         })
-        console.log(result)
-        dispatch(fetchSingleTicketSuccess(result.data.data[0]));
+        dispatch(fetchSingleTicketSuccess(result.data.data.length && result.data.data[0]));
     } catch (error) {
         dispatch(fetchSingleTicketFail(error.message));
+    }
+}
+
+export const replySingleTicket = (_id, msgObj) => async (dispatch) => {
+    dispatch(replyTicketLoading());
+    try {
+        const result = await axios.put(getSingleTicketUlr + _id, msgObj, {
+            headers: {
+                Authorization: sessionStorage.getItem('accessJWT'),
+            },
+        })
+        console.log(result)
+        if(result.data.status === "error") {
+            return replyTicketFail(result.data.message);
+        }
+        dispatch(fetchSingleTicket(_id));
+        dispatch(replyTicketSuccess(result.data));
+    } catch (error) {
+        replyTicketFail(error.message);
     }
 }
 

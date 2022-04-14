@@ -46,7 +46,6 @@ export const LoginPage = ({ switchForm }) => {
 
         try {
             const isAuth = await userLogin({ email, password })
-            console.log(isAuth);
             if(isAuth.status === "error") {
                return dispatch(loginFail(isAuth.message))
             }
