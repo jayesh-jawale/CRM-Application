@@ -2,6 +2,7 @@ import {fetchTicketLoading, fetchTicketSuccess, fetchTicketFail, searchTickets,
     fetchSingleTicketLoading, fetchSingleTicketSuccess, fetchSingleTicketFail,
     replyTicketLoading, replyTicketSuccess, replyTicketFail,
     closeTicketLoading, closeTicketSuccess, closeTicketFail} from "../slices/ticketSlice";
+import {newTicketLoading, newTicketSuccess, newTicketFail} from "../slices/addNewTicketSlice";
 import axios from "axios";
 
 const rootUrl = "http://localhost:3001/v1/";
@@ -53,6 +54,23 @@ export const replySingleTicket = (_id, msgObj) => async (dispatch) => {
         dispatch(replyTicketSuccess(result.data));
     } catch (error) {
         replyTicketFail(error.message);
+    }
+}
+
+export const addNewTicket = (frmData) => async (dispatch) => {
+    dispatch(newTicketLoading());
+    try {
+        const result = await axios.post(getSingleTicketUlr, frmData, {
+            headers: {
+                Authorization: sessionStorage.getItem('accessJWT'),
+            },
+        })
+        if(result.data.status === "error") {
+            return replyTicketFail(result.data.message);
+        }
+        dispatch(newTicketSuccess(result.data));
+    } catch (error) {
+        newTicketFail(error.message);
     }
 }
 
