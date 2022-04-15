@@ -1,10 +1,12 @@
 import {fetchTicketLoading, fetchTicketSuccess, fetchTicketFail, searchTickets,
     fetchSingleTicketLoading, fetchSingleTicketSuccess, fetchSingleTicketFail,
-    replyTicketLoading, replyTicketSuccess, replyTicketFail} from "../slices/ticketSlice";
+    replyTicketLoading, replyTicketSuccess, replyTicketFail,
+    closeTicketLoading, closeTicketSuccess, closeTicketFail} from "../slices/ticketSlice";
 import axios from "axios";
 
 const rootUrl = "http://localhost:3001/v1/";
 const getSingleTicketUlr = rootUrl + "ticket/";
+const closeTicketURL = rootUrl + "ticket/close_ticket/";
 
 export const fetchAllTickets = () => async (dispatch) => {
     dispatch(fetchTicketLoading());
@@ -44,7 +46,6 @@ export const replySingleTicket = (_id, msgObj) => async (dispatch) => {
                 Authorization: sessionStorage.getItem('accessJWT'),
             },
         })
-        console.log(result)
         if(result.data.status === "error") {
             return replyTicketFail(result.data.message);
         }
@@ -52,6 +53,25 @@ export const replySingleTicket = (_id, msgObj) => async (dispatch) => {
         dispatch(replyTicketSuccess(result.data));
     } catch (error) {
         replyTicketFail(error.message);
+    }
+}
+
+export const closeTicket = (_id) => async (dispatch) => {
+    dispatch(closeTicketLoading());
+    try {
+        const result = await axios.patch(closeTicketURL + _id, {}, {
+            headers: {
+                Authorization: sessionStorage.getItem('accessJWT'),
+            },
+        })
+        console.log(result)
+        if(result.data.status === "error") {
+            return closeTicketFail(result.data.message);
+        }
+        dispatch(fetchSingleTicket(_id));
+        dispatch(closeTicketSuccess("Status updated successfully"));
+    } catch (error) {
+        closeTicketFail(error.message);
     }
 }
 

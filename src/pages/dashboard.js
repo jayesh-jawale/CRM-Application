@@ -49,13 +49,7 @@ export const Dashboard = () => {
 };
 
 export const TicketTable = () => {
-  const {searchTicketList, isLoading, error} = useSelector((state) => state.tickets);
-
-   if(isLoading)
-    return <h3>Loading...</h3>
-
-   if(error)
-    return <h3>{error}</h3>
+  const {searchTicketList} = useSelector((state) => state.tickets);
 
     return (
       <Table striped bordered hover>

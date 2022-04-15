@@ -2,6 +2,7 @@ import {Container, Row, Col, Button} from "react-bootstrap";
 import { PageBreadCrumb } from "./dashboard";
 import { MessageHistory } from "../components/MessageHistory";
 import { UpdateTicket } from "../components/UpdateTicket";
+import { closeTicket } from "./ticketAction";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchSingleTicket } from "./ticketAction";
@@ -32,7 +33,11 @@ export const Page = () => {
                     <div className="status">{selectedSingleTicket.openedAt}</div>
                 </Col>
                 <Col className="text-right">
-                    <Button variant="outline-info">Close Ticket</Button>
+                    <Button
+                     onClick={() => dispatch(closeTicket(tId))}
+                     disabled={selectedSingleTicket.status === "Closed"}
+                     variant="outline-info"
+                     >Close Ticket</Button>
                 </Col>
             </Row>
             <Row className="mt-4">
