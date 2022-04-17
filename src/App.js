@@ -1,5 +1,6 @@
 import './App.css';
 import { EntryPage } from './pages/entryPage';
+import { Registration } from './registration/registrationPage';
 import {Layout} from '././layouts/Layout'
 import { Dashboard } from './pages/dashboard';
 import { AddTicket } from './pages/addTicket';
@@ -19,6 +20,10 @@ export default function App() {
         <Switch>
           <Route exact path="/">
             <EntryPage/>
+          </Route>
+
+          <Route exact path="/registration">
+            <Registration/>
           </Route>
 
           <PrivateRoute  exact path="/dashboard">

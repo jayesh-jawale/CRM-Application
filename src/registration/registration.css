@@ -1,8 +1,8 @@
-.login-page {
-    height: 100vh;
+.registration {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: aliceblue;
   }
 
   .form-box {

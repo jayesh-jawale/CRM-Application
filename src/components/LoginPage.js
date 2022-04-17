@@ -1,4 +1,4 @@
-import {Form, Button, Spinner} from 'react-bootstrap';
+import {Container, Row, Col, Form, Button, Spinner} from 'react-bootstrap';
 import { PropTypes } from 'prop-types';
 import {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -57,7 +57,17 @@ export const LoginPage = ({ switchForm }) => {
         }
     }
     return (
-            <Form autoComplete='off' onSubmit={handleOnSubmit}>
+        <div>
+            <Container>
+                      <Row>
+            <Col>
+              <h1>Login Form</h1>
+            </Col>
+          </Row>
+          <hr />
+            <Row>
+                <Col>
+                <Form autoComplete='off' onSubmit={handleOnSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -73,13 +83,27 @@ export const LoginPage = ({ switchForm }) => {
                 </Form.Group>
                 <hr />
                 <Button variant="primary" type="submit">
-                    Submit
+                    Login
                 </Button>
                 {isLoading && <Spinner animation="border" />}
                 <hr/>
-
-                <a href='#' onClick={() => switchForm('reset')}>Forgot Password</a>
             </Form>
+            </Col>
+        </Row>
+
+        <Row>
+            <Col>
+                <a href='#' onClick={() => switchForm('reset')}>Forgot Password</a>
+            </Col>
+        </Row>
+
+        <Row>
+        <Col>
+            Are you new here? <a href="/registration">Register Now</a>
+        </Col>
+      </Row>
+      </Container>
+    </div>
     )
 }
 
