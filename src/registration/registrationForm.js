@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert, Spinner } from "react-bootstrap";
+
+import {userRegistration} from '../registration/userRegistrationAction';
+import { useDispatch, useSelector } from "react-redux";
 
 const initialValues = {
-  fullName : "",
-  phone : "",
-  email : "",
-  companyName : "",
-  address : "",
-  password : "",
-  confirmPassword : "",
+  name : "Rohit Sharma",
+  phone : "1234567890",
+  email : "rohit.sharma@example.com",
+  company : "Mumbai Indians",
+  address : "Wankhede Stadium",
+  password : "Password@123",
+  confirmPassword : "Password@123",
 }
 
 const passwordVerification = {
@@ -21,6 +24,9 @@ const passwordVerification = {
 }
 
 export const RegistrationForm = () => {
+  const dispatch = useDispatch();
+  const {isLoading, status, message} = useSelector((state) => state.registration)
+
   const [newUser, setNewUser] = useState(initialValues);
   const [passwordError, setPasswordError] = useState(passwordVerification);
 
@@ -59,7 +65,18 @@ export const RegistrationForm = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(newUser);
+    const { name, phone, email, company, address, password } = newUser;
+
+    const newRegistration = {
+      name,
+      phone,
+      email,
+      company,
+      address,
+      password,
+    };
+    dispatch(userRegistration(newRegistration));
+    console.log(newRegistration);
   }
 
   return (
@@ -73,15 +90,22 @@ export const RegistrationForm = () => {
 
           <Row>
             <Col>
+              {message && <Alert>{message}</Alert>}
+            </Col>
+            </Row>
+
+          <Row>
+            <Col>
               <Form noValidate onSubmit={handleOnSubmit}>
                 <Form.Group className="mb-3" controlId="validationFormik01">
                   <Form.Label>Full Name</Form.Label>
                   <Form.Control
                     type="text"
-                    name="fullName"
-                    value={newUser.fullName}
+                    name="name"
+                    value={newUser.name}
                     onChange={handleOnChange}
                     placeholder="Your name"
+                    required
                   />
                 </Form.Group>
 
@@ -93,6 +117,7 @@ export const RegistrationForm = () => {
                     value={newUser.phone}
                     onChange={handleOnChange}
                     placeholder="Phone"
+                    required
                   />
                 </Form.Group>
 
@@ -104,6 +129,7 @@ export const RegistrationForm = () => {
                     value={newUser.email}
                     onChange={handleOnChange}
                     placeholder="Email"
+                    required
                    />
                 </Form.Group>
 
@@ -111,10 +137,11 @@ export const RegistrationForm = () => {
                   <Form.Label>Company Name</Form.Label>
                   <Form.Control
                     type="text"
-                    name="companyName"
-                    value={newUser.companyName}
+                    name="company"
+                    value={newUser.company}
                     onChange={handleOnChange}
                     placeholder="Company Name"
+                    required
                   />
                 </Form.Group>
 
@@ -126,6 +153,7 @@ export const RegistrationForm = () => {
                     value={newUser.address}
                     onChange={handleOnChange}
                     placeholder="Address"
+                    required
                   />
                 </Form.Group>
 
@@ -137,6 +165,7 @@ export const RegistrationForm = () => {
                     value={newUser.password}
                     onChange={handleOnChange}
                     placeholder="Password"
+                    required
                   />
                 </Form.Group>
 
@@ -148,6 +177,7 @@ export const RegistrationForm = () => {
                     value={newUser.confirmPassword}
                     onChange={handleOnChange}
                     placeholder="Confirm Password"
+                    required
                   />
                 </Form.Group>
 
@@ -170,6 +200,7 @@ export const RegistrationForm = () => {
                 </ul>
 
                 <Button type="submit" disabled={Object.values(passwordError).includes(false)}>Submit form</Button>
+                {isLoading && <Spinner variant="info" animation="border" />}
               </Form>
             </Col>
           </Row>
