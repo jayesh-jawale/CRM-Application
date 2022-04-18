@@ -5,13 +5,13 @@ import {userRegistration} from '../registration/userRegistrationAction';
 import { useDispatch, useSelector } from "react-redux";
 
 const initialValues = {
-  name : "Rohit Sharma",
-  phone : "1234567890",
-  email : "rohit.sharma@example.com",
-  company : "Mumbai Indians",
-  address : "Wankhede Stadium",
-  password : "Password@123",
-  confirmPassword : "Password@123",
+  name : "",
+  phone : "",
+  email : "",
+  company : "",
+  address : "",
+  password : "",
+  confirmPassword : "",
 }
 
 const passwordVerification = {

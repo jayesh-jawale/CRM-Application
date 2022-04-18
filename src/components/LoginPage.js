@@ -9,8 +9,8 @@ import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 
 export const LoginPage = ({ switchForm }) => {
-    const [email, setEmail] = useState('jawalejayesh123@gmail.com');
-    const [password, setPassword] = useState('Password123');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     
     const dispatch = useDispatch();
     const history = useHistory();
